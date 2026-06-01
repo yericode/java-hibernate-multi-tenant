@@ -8,16 +8,26 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import tools.jackson.databind.ObjectMapper;
 
-@SpringBootApplication
-public class DemoApplication implements WebMvcConfigurer {
 
+/** by @filter */
+// @SpringBootApplication
+//public class DemoApplication implements WebMvcConfigurer {
+//
+//    public static void main(String[] args) {
+//        SpringApplication.run(DemoApplication.class, args);
+//    }
+//
+//    @Override
+//    public void addInterceptors(InterceptorRegistry registry) {
+//        registry.addInterceptor(new TenantInterceptor())
+//                .addPathPatterns("/users/**", "/orders/**");
+//    }
+//}
+
+/** by @TenantId */
+@SpringBootApplication
+public class DemoApplication {
     public static void main(String[] args) {
         SpringApplication.run(DemoApplication.class, args);
-    }
-
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new TenantInterceptor())
-                .addPathPatterns("/users/**", "/orders/**");
     }
 }

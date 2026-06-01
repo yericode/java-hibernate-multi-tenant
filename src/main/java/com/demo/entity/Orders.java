@@ -1,21 +1,24 @@
 package com.demo.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.annotations.TenantId;
 import org.hibernate.type.SqlTypes;
 
 import java.util.Map;
 
 @Entity
-public class Orders extends BaseTenantEntity {
+//public class Orders extends BaseTenantEntity {
+public class Orders {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orderId;
 
     private Long userId;
+
+    @TenantId
+    @Column(name = "tenant_id", nullable = false, updatable = false)
+    private String tenantId;
 
     @JdbcTypeCode(SqlTypes.JSON)
     private Map<String, Object> orderDetail;
@@ -44,13 +47,11 @@ public class Orders extends BaseTenantEntity {
         this.orderDetail = orderDetail;
     }
 
-    @Override
-    public String toString() {
-        return "Orders{" +
-                "orderId=" + orderId +
-                ", userId=" + userId +
-                ", orderDetail='" + orderDetail + '\'' +
-                ", tenantId='" + getTenantId() + '\'' +
-                '}';
+    public String getTenantId() {
+        return tenantId;
+    }
+
+    public void setTenantId(String tenantId) {
+        this.tenantId = tenantId;
     }
 }
