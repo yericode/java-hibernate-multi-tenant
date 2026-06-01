@@ -21,13 +21,13 @@ values
 
 insert into orders(tenant_id, user_id, order_detail)
 values
-  ('e29a9256', 1, '{"product_name": "商品1", "price": 8000}'),
-  ('e29a9256', 1, '{"product_name": "商品2", "price": 12550}'),
-  ('d2447cca', 2, '{"product_name": "商品3", "price": 78940}'),
-  ('d2447cca', 3, '{"product_name": "商品4", "price": 51530}'),
-  ('400f99f7', 4, '{"product_name": "商品5", "price": 4560}'),
-  ('400f99f7', 6, '{"product_name": "商品6", "price": 50}'),
-  ('68c82b83', 7, '{"product_name": "商品7", "price": 770}'),
-  ('68c82b83', 8, '{"product_name": "商品8", "price": 150}'),
-  ('3d1eaf78', 9, '{"product_name": "商品9", "price": 7850}'),
-  ('3d1eaf78', 10, '{"product_name": "商品10", "price": 140}');
+  ('e29a9256', 1, '{"productName": "商品1", "price": 8000}'),
+  ('e29a9256', 1, '{"productName": "商品2", "price": 12550}'),
+  ('e29a9256', 2, '{"productName": "商品3", "price": 78940}'),
+  ('d2447cca', 3, '{"productName": "商品4", "price": 51530}'),
+  ('d2447cca', 4, '{"productName": "商品5", "price": 4560}'),
+  ('400f99f7', 6, '{"productName": "商品6", "price": 50}'),
+  ('68c82b83', 7, '{"productName": "商品7", "price": 770}'),
+  ('68c82b83', 8, '{"productName": "商品8", "price": 150}'),
+  ('3d1eaf78', 9, '{"productName": "商品9", "price": 7850}'),
+  ('3d1eaf78', 10, '{"productName": "商品10", "price": 140}');

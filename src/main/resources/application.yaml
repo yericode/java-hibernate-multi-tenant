@@ -1,17 +1,29 @@
+server:
+  port: 5050
 spring:
   application:
     name: demo
   datasource:
-    url: jdbc:postgresql://localhost:5432/mydb
+    url: jdbc:postgresql://localhost:15432/mydb
     username: user
     password: password
     driver-class-name: org.postgresql.Driver
   sql:
     init:
       mode: always
+      platform: share_schema
       encoding: UTF-8
-      continue-on-error: false # 若有 SQL 失敗是否繼續啟動伺服器
+      continue-on-error: false
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
-      ddl-auto: none # 順序上與 JDBC 機制不順，所以建議設定 none、validate
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        type:
+          json_format_mapper: com.demo.config.CustomHibernateJsonFormatter
+logging:
+  pattern:
+    console: '%d{yyyy-MM-dd HH:mm:ss.SSS} %5p --- [%-4t] %-40.40logger{39} : %m%n'

@@ -7,26 +7,30 @@ import jakarta.persistence.Id;
 
 @Entity
 public class Tenants {
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private String tenantId;
-  private String tenantName;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private String tenantId;
 
-  public String getTenantId() {
-    return tenantId;
-  }
-  public void setTenantId(String tenantId) {
-    this.tenantId = tenantId;
-  }
-  public String getTenantName() {
-    return tenantName;
-  }
-  public void setTenantName(String tenantName) {
-    this.tenantName = tenantName;
-  }
+    private String tenantName;
 
-  @Override
-  public String toString() {
-    return "Tenants [tenantId=" + tenantId + ", tenantName=" + tenantName + "]";
-  }
+    public String getTenantId() {
+        return tenantId;
+    }
+
+    public void setTenantId(String tenantId) {
+        this.tenantId = tenantId;
+    }
+
+    public String getTenantName() {
+        return tenantName;
+    }
+
+    public void setTenantName(String tenantName) {
+        this.tenantName = tenantName;
+    }
+
+    @Override
+    public String toString() {
+        return "Tenants [tenantId=" + tenantId + ", tenantName=" + tenantName + "]";
+    }
 }

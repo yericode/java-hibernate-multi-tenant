@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+
+    <body>
+        <label>租戶ID： <input type="text" id="tenant-input" /></label>
+        <button onClick="getAllUsers()">取得所有會員</button>
+        <button onClick="getAllOrders()">取得所有訂單</button>
+    </body>
+    <script>
+        const tenantInput = document.getElementById("tenant-input");
+
+        function getAllUsers() {
+            if (!tenantInput.value) return;
+            let table = document.getElementsByTagName('table');
+
+            if (table.innerHTML) {
+                document.body.removeChild(table);
+            }
+            const tenantId = tenantInput.value;
+            console.log('tenantId: ', tenantId);
+            fetch('http://localhost:5050/users', { method: 'GET', headers: { 'X-Tenant-ID': tenantId } })
+                .then(res => res.json())
+                .then(users => {
+                    table = document.createElement('table');
+                    table.setAttribute('border', '1');
+                    table.style.marginTop = '8px';
+
+                    let html = "";
+                    for (let user of users) {
+                        html += `
+                        <tr>
+                            <td>${user.userId}</td>
+                            <td>${user.tenantId}</td>
+                            <td>${user.userName}</td>
+                            <td>${user.phone}</td>
+                            <td>${user.email}</td>
+                        </tr>`;
+                    }
+                    table.innerHTML = html;
+                    document.body.appendChild(table);
+                });
+        };
+
+        function getAllOrders() {
+            if (!tenantInput.value) return;
+            let table = document.getElementsByTagName('table');
+
+            if (table.innerHTML) {
+                document.body.removeChild(table);
+            }
+            const tenantId = tenantInput.value;
+            console.log('tenantId: ', tenantId);
+            fetch('http://localhost:5050/orders', { method: 'GET', headers: { 'X-Tenant-ID': tenantId } })
+                .then(res => res.json())
+                .then(orders => {
+                    table = document.createElement('table');
+                    table.setAttribute('border', '1');
+                    table.style.marginTop = '8px';
+
+                    let html = "";
+                    for (let order of orders) {
+                        const { productName, price } = order.orderDetail;
+
+                        html += `
+                        <tr>
+                            <td>${order.userId}</td>
+                            <td>${productName}</td>
+                            <td>${price}</td>
+                        </tr>`;
+                    }
+                    table.innerHTML = html;
+                    document.body.appendChild(table);
+                });
+        };
+    </script>
+
+</html>
