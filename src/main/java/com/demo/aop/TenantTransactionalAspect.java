@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 @Aspect
 @Component
@@ -22,12 +23,14 @@ public class TenantTransactionalAspect {
     @Around("@annotation(tenantTransactional)")
     public Object around(ProceedingJoinPoint joinPoint, TenantTransactional tenantTransactional) throws Throwable {
         String tenantId = TenantContext.getCurrentTenant();
+        // 避免交易還沒開始
+        if (!TransactionSynchronizationManager.isActualTransactionActive()) {
+            throw new IllegalStateException("@TenantTransactional must run inside transaction");
+        }
         if (tenantId == null) {
             throw new IllegalStateException("No tenant found in TenantContext");
         }
-        entityManager.createNativeQuery("SET LOCAL app.tenant_id = :tenantId")
-                .setParameter("tenantId", "'" + tenantId + "'")
-                .executeUpdate();
+        entityManager.createNativeQuery(String.format("SET LOCAL app.tenant_id = '%s'", tenantId)).executeUpdate();
         return joinPoint.proceed();
     }
 }

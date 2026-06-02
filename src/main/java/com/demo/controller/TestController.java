@@ -6,7 +6,6 @@ import com.demo.entity.Users;
 import com.demo.repository.OrderRepository;
 import com.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -33,6 +32,7 @@ public class TestController {
     }
 
     @GetMapping("/orders")
+    @TenantTransactional
     public List<Orders> getAllOrders() {
         return orderRepository.findAll();
     }
