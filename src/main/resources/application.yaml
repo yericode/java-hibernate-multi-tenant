@@ -5,11 +5,19 @@ spring:
     name: demo
   datasource:
     url: jdbc:postgresql://localhost:15432/mydb
-    username: user
-    password: password
+    username: test
+    password: test
     driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
+      idle-timeout: 30000
+      pool-name: multi-tenant-pool
   sql:
     init:
+      # 執行 schema.sql 的超級權限帳號，可以執行 POLICY 並且建立一個一般使用者
+      username: root
+      password: password
       mode: always
       platform: share_schema
       encoding: UTF-8

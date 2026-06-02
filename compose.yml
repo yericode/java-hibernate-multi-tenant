@@ -2,9 +2,10 @@ name: java-hibernate-multi-tenant
 services:
   postgres:
     image: postgres:latest
-    container_name: postgres
+    container_name: my-postgres
+    # 這裡建立的是超級權限者，擁有 BYPASSRLS 權限，RLS 的規則不會套用在這裡
     environment:
-      POSTGRES_USER: user
+      POSTGRES_USER: root
       POSTGRES_PASSWORD: password
       POSTGRES_DB: mydb
     ports:
