@@ -16,8 +16,8 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-@Configuration
-@EnableTransactionManagement
+//@Configuration
+//@EnableTransactionManagement
 public class TenantAwareJpaTransactionConfig {
     @Bean
     public PlatformTransactionManager transactionManager(EntityManagerFactory emf, DataSource dataSource) {
