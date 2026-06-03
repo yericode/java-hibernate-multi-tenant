@@ -26,13 +26,11 @@ public class TestController {
     }
 
     @GetMapping("/users")
-    @TenantTransactional
     public List<Users> getAllUsers() {
         return userRepository.findAll();
     }
 
     @GetMapping("/orders")
-    @TenantTransactional
     public List<Orders> getAllOrders() {
         return orderRepository.findAll();
     }

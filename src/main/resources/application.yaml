@@ -30,7 +30,7 @@ spring:
     properties:
       hibernate:
         format_sql: true
-        multiTenancy: DISCRIMINATOR # DISCRIMINATOR = Share Schema、SCHEMA = Schema-per-tenant、DATABASE = DB-per-tenant
+        multiTenancy: NONE # DISCRIMINATOR = Share Schema、SCHEMA = Schema-per-tenant、DATABASE = DB-per-tenant
         type:
           json_format_mapper: com.demo.config.CustomHibernateJsonFormatter
 logging:

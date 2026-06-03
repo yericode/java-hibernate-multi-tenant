@@ -10,7 +10,7 @@ public class Users {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
 
-    @TenantId
+//    @TenantId
     @Column(name = "tenant_id", nullable = false, updatable = false)
     private String tenantId;
 
