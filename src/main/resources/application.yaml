@@ -19,7 +19,7 @@ spring:
       username: root
       password: password
       mode: always
-      platform: share_schema
+      platform: schema_per_tenant
       encoding: UTF-8
       continue-on-error: false
   jpa:

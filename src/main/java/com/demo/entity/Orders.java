@@ -17,8 +17,8 @@ public class Orders {
     private Long userId;
 
 //    @TenantId
-    @Column(name = "tenant_id", nullable = false, updatable = false)
-    private String tenantId;
+//    @Column(name = "tenant_id", nullable = false, updatable = false)
+//    private String tenantId;
 
     @JdbcTypeCode(SqlTypes.JSON)
     private Map<String, Object> orderDetail;
@@ -45,13 +45,5 @@ public class Orders {
 
     public void setOrderDetail(Map<String, Object> orderDetail) {
         this.orderDetail = orderDetail;
-    }
-
-    public String getTenantId() {
-        return tenantId;
-    }
-
-    public void setTenantId(String tenantId) {
-        this.tenantId = tenantId;
     }
 }

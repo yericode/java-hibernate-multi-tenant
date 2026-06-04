@@ -11,8 +11,8 @@ public class Users {
     private Long userId;
 
 //    @TenantId
-    @Column(name = "tenant_id", nullable = false, updatable = false)
-    private String tenantId;
+//    @Column(name = "tenant_id", nullable = false, updatable = false)
+//    private String tenantId;
 
     private String userName;
 
@@ -50,13 +50,5 @@ public class Users {
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    public String getTenantId() {
-        return tenantId;
-    }
-
-    public void setTenantId(String tenantId) {
-        this.tenantId = tenantId;
     }
 }
