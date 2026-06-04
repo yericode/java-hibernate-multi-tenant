@@ -18,8 +18,8 @@ spring:
       # 執行 schema.sql 的超級權限帳號，可以執行 POLICY 並且建立一個一般使用者
       username: root
       password: password
-      mode: always
-      platform: schema_per_tenant
+      mode: never
+      platform:
       encoding: UTF-8
       continue-on-error: false
   jpa:

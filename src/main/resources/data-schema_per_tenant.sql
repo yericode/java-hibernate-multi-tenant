@@ -22,8 +22,8 @@ VALUES
     ('測試4', 'test4@email.com', '0978545654');
 INSERT INTO tenant_d2447cca.orders(user_id, order_detail)
 VALUES
-    (3, '{"productName": "商品4", "price": 51530}'),
-    (4, '{"productName": "商品5", "price": 4560}');
+    (1, '{"productName": "商品4", "price": 51530}'),
+    (2, '{"productName": "商品5", "price": 4560}');
 
 INSERT INTO tenant_400f99f7.users(user_name, email, phone)
 VALUES
@@ -31,7 +31,7 @@ VALUES
     ('測試6', 'test6@email.com', '0912489532');
 INSERT INTO tenant_400f99f7.orders(user_id, order_detail)
 VALUES
-    (6, '{"productName": "商品6", "price": 50}');
+    (2, '{"productName": "商品6", "price": 50}');
 
 INSERT INTO tenant_68c82b83.users(user_name, email, phone)
 VALUES
@@ -39,8 +39,8 @@ VALUES
     ('測試8', 'test8@email.com', '0987563481');
 INSERT INTO tenant_68c82b83.orders(user_id, order_detail)
 VALUES
-    (7, '{"productName": "商品7", "price": 770}'),
-    (8, '{"productName": "商品8", "price": 150}');
+    (1, '{"productName": "商品7", "price": 770}'),
+    (2, '{"productName": "商品8", "price": 150}');
 
 INSERT INTO tenant_3d1eaf78.users(user_name, email, phone)
 VALUES
@@ -48,5 +48,5 @@ VALUES
     ('測試10', 'test10@email.com', '0945783456');
 INSERT INTO tenant_3d1eaf78.orders(user_id, order_detail)
 VALUES
-    (9, '{"productName": "商品9", "price": 7850}'),
-    (10, '{"productName": "商品10", "price": 140}');
+    (1, '{"productName": "商品9", "price": 7850}'),
+    (2, '{"productName": "商品10", "price": 140}');
