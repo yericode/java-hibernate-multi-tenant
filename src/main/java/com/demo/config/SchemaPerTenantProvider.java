@@ -15,86 +15,86 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Map;
 
-@Component
-public class SchemaPerTenantProvider implements MultiTenantConnectionProvider<String>, HibernatePropertiesCustomizer {
-    @Autowired
-    private DataSource dataSource;
-
-    @Override
-    public Connection getAnyConnection() throws SQLException {
-        return dataSource.getConnection();
-    }
-
-    @Override
-    public void releaseAnyConnection(Connection connection) throws SQLException {
-        connection.close();
-    }
-
-    @Override
-    public Connection getConnection(String s) throws SQLException {
-        String tenantId = TenantContext.getCurrentTenant();
-        if (tenantId == null) {
-            throw new IllegalStateException("No tenant in context");
-        }
-        System.out.println("getConnection!");
-        Connection conn = dataSource.getConnection();
-        try (Statement stmt = conn.createStatement()) {
-            stmt.execute(String.format(" SET search_path TO %s; ", "tenant_" + tenantId));
-        }
-        return conn;
-    }
-
-    @Override
-    public void releaseConnection(String s, Connection connection) throws SQLException {
-        System.out.println("releaseConnection!");
-        try (Statement stmt = connection.createStatement()) {
-            stmt.execute(" SET search_path TO DEFAULT; ");
-        }
-        connection.close();
-    }
-
-    @Override
-    public void customize(Map<String, Object> hibernateProperties) {
-        hibernateProperties.put(AvailableSettings.MULTI_TENANT_CONNECTION_PROVIDER, this);
-    }
-
-    @Override
-    public Connection getReadOnlyConnection(String tenantIdentifier) throws SQLException {
-        return MultiTenantConnectionProvider.super.getReadOnlyConnection(tenantIdentifier);
-    }
-
-    @Override
-    public void releaseReadOnlyConnection(String tenantIdentifier, Connection connection) throws SQLException {
-        MultiTenantConnectionProvider.super.releaseReadOnlyConnection(tenantIdentifier, connection);
-    }
-
-    @Override
-    public boolean handlesConnectionSchema() {
-        return MultiTenantConnectionProvider.super.handlesConnectionSchema();
-    }
-
-    @Override
-    public boolean handlesConnectionReadOnly() {
-        return MultiTenantConnectionProvider.super.handlesConnectionReadOnly();
-    }
-
-    @Override
-    public DatabaseConnectionInfo getDatabaseConnectionInfo(Dialect dialect) {
-        return MultiTenantConnectionProvider.super.getDatabaseConnectionInfo(dialect);
-    }
-
-    @Override
-    public boolean supportsAggressiveRelease() {
-        return false;
-    }
-
-    @Override
-    public boolean isUnwrappableAs(Class<?> aClass) {
-        return false;
-    }
-
-    @Override
-    public <T> T unwrap(Class<T> aClass) {
-        return null;
-    }
-}
+//@Component
+//public class SchemaPerTenantProvider implements MultiTenantConnectionProvider<String>, HibernatePropertiesCustomizer {
+//    @Autowired
+//    private DataSource dataSource;
+//
+//    @Override
+//    public Connection getAnyConnection() throws SQLException {
+//        return dataSource.getConnection();
+//    }
+//
+//    @Override
+//    public void releaseAnyConnection(Connection connection) throws SQLException {
+//        connection.close();
+//    }
+//
+//    @Override
+//    public Connection getConnection(String s) throws SQLException {
+//        String tenantId = TenantContext.getCurrentTenant();
+//        if (tenantId == null) {
+//            throw new IllegalStateException("No tenant in context");
+//        }
+//        System.out.println("getConnection!");
+//        Connection conn = dataSource.getConnection();
+//        try (Statement stmt = conn.createStatement()) {
+//            stmt.execute(String.format(" SET search_path TO %s; ", "tenant_" + tenantId));
+//        }
+//        return conn;
+//    }
+//
+//    @Override
+//    public void releaseConnection(String s, Connection connection) throws SQLException {
+//        System.out.println("releaseConnection!");
+//        try (Statement stmt = connection.createStatement()) {
+//            stmt.execute(" SET search_path TO DEFAULT; ");
+//        }
+//        connection.close();
+//    }
+//
+//    @Override
+//    public void customize(Map<String, Object> hibernateProperties) {
+//        hibernateProperties.put(AvailableSettings.MULTI_TENANT_CONNECTION_PROVIDER, this);
+//    }
+//
+//    @Override
+//    public Connection getReadOnlyConnection(String tenantIdentifier) throws SQLException {
+//        return MultiTenantConnectionProvider.super.getReadOnlyConnection(tenantIdentifier);
+//    }
+//
+//    @Override
+//    public void releaseReadOnlyConnection(String tenantIdentifier, Connection connection) throws SQLException {
+//        MultiTenantConnectionProvider.super.releaseReadOnlyConnection(tenantIdentifier, connection);
+//    }
+//
+//    @Override
+//    public boolean handlesConnectionSchema() {
+//        return MultiTenantConnectionProvider.super.handlesConnectionSchema();
+//    }
+//
+//    @Override
+//    public boolean handlesConnectionReadOnly() {
+//        return MultiTenantConnectionProvider.super.handlesConnectionReadOnly();
+//    }
+//
+//    @Override
+//    public DatabaseConnectionInfo getDatabaseConnectionInfo(Dialect dialect) {
+//        return MultiTenantConnectionProvider.super.getDatabaseConnectionInfo(dialect);
+//    }
+//
+//    @Override
+//    public boolean supportsAggressiveRelease() {
+//        return false;
+//    }
+//
+//    @Override
+//    public boolean isUnwrappableAs(Class<?> aClass) {
+//        return false;
+//    }
+//
+//    @Override
+//    public <T> T unwrap(Class<T> aClass) {
+//        return null;
+//    }
+//}

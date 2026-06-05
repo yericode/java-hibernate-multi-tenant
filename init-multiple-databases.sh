@@ -5,14 +5,12 @@ POSTGRES_DB=mydb
 
 echo "Creating tenant databases..."
 
-psql -v ON_ERROR_STOP=1 \
-     --username "$POSTGRES_USER" \
-     --dbname "$POSTGRES_DB" <<EOF
+psql -v ON_ERROR_STOP=1 -U "$POSTGRES_USER" -d "$POSTGRES_DB" <<EOF
 
     CREATE TABLE IF NOT EXISTS tenant_registry (
         tenant_id VARCHAR(50) PRIMARY KEY,
         db_name VARCHAR(100) NOT NULL,
-        db_user VARCHAR(100) NOT NULL
+        jdbc_url TEXT NOT NULL
     );
 
     CREATE DATABASE tenant_e29a9256;
@@ -25,9 +23,7 @@ EOF
 
 echo "Creating tenant_e29a9256 schema..."
 
-psql -v ON_ERROR_STOP=1 \
-     --username "$POSTGRES_USER" \
-     --dbname tenant_e29a9256 <<EOF
+psql -v ON_ERROR_STOP=1 -U "$POSTGRES_USER" -d tenant_e29a9256 <<EOF
 
 CREATE TABLE users
 (
@@ -58,9 +54,7 @@ EOF
 
 echo "Creating tenant_d2447cca schema..."
 
-psql -v ON_ERROR_STOP=1 \
-     --username "$POSTGRES_USER" \
-     --dbname tenant_d2447cca <<EOF
+psql -v ON_ERROR_STOP=1 -U "$POSTGRES_USER" -d tenant_d2447cca <<EOF
 
 CREATE TABLE users
 (
@@ -91,9 +85,7 @@ EOF
 
 echo "Creating tenant_400f99f7 schema..."
 
-psql -v ON_ERROR_STOP=1 \
-     --username "$POSTGRES_USER" \
-     --dbname tenant_400f99f7 <<EOF
+psql -v ON_ERROR_STOP=1 -U "$POSTGRES_USER" -d tenant_400f99f7 <<EOF
 
 CREATE TABLE users
 (
@@ -122,9 +114,7 @@ EOF
 
 echo "Creating tenant_68c82b83 schema..."
 
-psql -v ON_ERROR_STOP=1 \
-     --username "$POSTGRES_USER" \
-     --dbname tenant_68c82b83 <<EOF
+psql -v ON_ERROR_STOP=1 -U "$POSTGRES_USER" -d tenant_68c82b83 <<EOF
 
 CREATE TABLE users
 (
@@ -154,9 +144,7 @@ EOF
 
 echo "Creating tenant_3d1eaf78 schema..."
 
-psql -v ON_ERROR_STOP=1 \
-     --username "$POSTGRES_USER" \
-     --dbname tenant_3d1eaf78 <<EOF
+psql -v ON_ERROR_STOP=1 -U "$POSTGRES_USER" -d tenant_3d1eaf78 <<EOF
 
 CREATE TABLE users
 (
@@ -186,17 +174,15 @@ EOF
 
 echo "Registering tenants..."
 
-psql -v ON_ERROR_STOP=1 \
-     --username "$POSTGRES_USER" \
-     --dbname "$POSTGRES_DB" <<EOF
+psql -v ON_ERROR_STOP=1 -U "$POSTGRES_USER" -d "$POSTGRES_DB" <<EOF
 
-INSERT INTO tenant_registry(tenant_id, db_name, db_user)
+INSERT INTO tenant_registry(tenant_id, db_name, jdbc_url)
 VALUES
-  ('tenant_e29a9256', 'tenant_e29a9256', 'root'),
-  ('tenant_d2447cca', 'tenant_d2447cca', 'root'),
-  ('tenant_400f99f7', 'tenant_400f99f7', 'root'),
-  ('tenant_68c82b83', 'tenant_68c82b83', 'root'),
-  ('tenant_3d1eaf78', 'tenant_3d1eaf78', 'root');
+  ('e29a9256', 'tenant_e29a9256', 'jdbc:postgresql://localhost:15432/tenant_e29a9256'),
+  ('d2447cca', 'tenant_d2447cca', 'jdbc:postgresql://localhost:15432/tenant_d2447cca'),
+  ('400f99f7', 'tenant_400f99f7', 'jdbc:postgresql://localhost:15432/tenant_400f99f7'),
+  ('68c82b83', 'tenant_68c82b83', 'jdbc:postgresql://localhost:15432/tenant_68c82b83'),
+  ('3d1eaf78', 'tenant_3d1eaf78', 'jdbc:postgresql://localhost:15432/tenant_3d1eaf78');
 
 EOF
 
